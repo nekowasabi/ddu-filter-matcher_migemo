@@ -32,12 +32,12 @@ export class Filter extends BaseFilter<Params> {
 
     const migemo_dict = await globals.get(args.denops, "migemo_dict");
     ensureString(migemo_dict)
-    
+
     const cmd = Deno.run({
       cmd: ["cmigemo", "-w", args.input,  "-d", migemo_dict],
-        stdin: "piped",
-        stdout: "piped",
-        stderr: "piped",
+      stdin: "piped",
+      stdout: "piped",
+      stderr: "piped",
     })
     const output = await cmd.output();
 
@@ -47,7 +47,7 @@ export class Filter extends BaseFilter<Params> {
 
     let items = args.items;
 
-    for (let subInput of inputs) {
+    for (const subInput of inputs) {
       items = items.filter((item) => {
         const ret = item.matcherKey.search(subInput.slice(0, -2));
 
@@ -67,9 +67,9 @@ export class Filter extends BaseFilter<Params> {
 
           const matcherKey = display;
 
-          let highlights = item.highlights?.filter((hl) => hl.name != "matched") ?? [];
+          const highlights = item.highlights?.filter((hl) => hl.name != "matched") ?? [];
 
-          for (let subInput of inputs) {
+          for (const subInput of inputs) {
             const start = matcherKey.search(subInput.slice(0, -2));
 
             if (start >= 0) {
