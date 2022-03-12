@@ -31,10 +31,6 @@ export class Filter extends BaseFilter<Params> {
       return Promise.resolve(args.items);
     }
 
-    // if (/.*P$/.test(args.input)) {
-    //   return Promise.resolve(args.items);
-    // }
-
     const migemo_dict = await globals.get(args.denops, "migemo_dict");
     ensureString(migemo_dict);
 
@@ -100,7 +96,7 @@ export class Filter extends BaseFilter<Params> {
 
   params(): Params {
     return {
-      highlightMatched: "Matched",
+      highlightMatched: "",
     };
   }
 }
